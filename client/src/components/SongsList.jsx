@@ -5,9 +5,8 @@ import axios from 'axios'
 export default function SongsList() {
     const {songs,setSongs} = useMusicContext()
     async function fetchSongs(){
-        axios.get('http://localhost:4000/api/v1/music')
+        await axios.get('http://localhost:4000/api/v1/music')
         .then((data)=>{
-            console.log(data.data);
             setSongs(data.data)
         })
         .catch((error)=>console.error(error))
@@ -22,11 +21,11 @@ export default function SongsList() {
         fetchSongs()
     },[])
     return (
-        <div className='my-4'>
+        <div className='my-4 overflow-y-auto h-[57vh] '>
             {
                 songs &&
-                songs.map((data,index)=>(
-                    <Song data={data} key={data._id} index={index} />
+                songs?.map((data,index)=>(
+                    <Song data={data} key={index} index={index} />
                 ))
             }
         </div>

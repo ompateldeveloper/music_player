@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const prisma = require('prisma');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config()
 
 const app = express()
@@ -11,10 +12,16 @@ app.use(bodyParser.json())
 const { route } = require('./api/route');
 
 const PORT = process.env.PORT;
-app.get('/',(req,res)=>{
-    res.send('hello from backend')
-})
+
+
+
+
 app.use('/api',route);
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 mongoose.connect(process.env.MONGO_URI ||'')
 .then(()=>{
     app.listen(PORT || 4000,()=>{
@@ -22,4 +29,5 @@ mongoose.connect(process.env.MONGO_URI ||'')
         console.log('http://localhost:'+PORT);
     })
 })
+
 .catch(err=>console.error(err))

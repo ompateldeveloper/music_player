@@ -12,13 +12,13 @@ export default function DashboardCore() {
     }
     const handleFileSubmit = async() => {
         if (musicFile) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const arrayBuffer = e.target.result;
+            // const reader = new FileReader();
+            // reader.onload = (e) => {
+            //     const arrayBuffer = e.target.result;
 
-                console.log(arrayBuffer);
-            }
-            reader.readAsArrayBuffer(musicFile)
+            //     console.log(arrayBuffer);
+            // }
+            // reader.readAsArrayBuffer(musicFile)
             await axios.post('http://localhost:4000/api/v1/music',formData)
             .then((data)=>{
                 setSongs([...songs,data.data])
@@ -35,7 +35,6 @@ export default function DashboardCore() {
                         <input type="file" className='hidden' accept="audio/*" name="" id="add-music" onChange={handleChange} />
                     </div>
                     <button className='text-xs px-4 py-2 bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
-                    <div className="div" onClick={() => { console.log(musicFile) }}>see</div>
                 </div>
                     {musicFile && (
                             <div className='flex'>

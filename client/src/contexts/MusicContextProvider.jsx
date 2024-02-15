@@ -5,9 +5,7 @@ const audio =new Audio();
 
 export function MusicContextProvider({ children }) {
     const [songs,setSongs] = useState()
-    
-    useEffect(()=>{
-    },[])
+
     return (
         <MusicContext.Provider value={{songs,setSongs}}>
             {children}
