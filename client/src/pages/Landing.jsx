@@ -11,6 +11,7 @@ export default function Landing() {
                     <div className="absolute h-96 w-96 bg-violet-500 opacity-10 rounded-full -translate-y-64"></div>
                     <div className="absolute h-96 w-96 bg-pink-500 opacity-10 rounded-full translate-y-20 translate-x-36"></div>
                 </div>
+                <a href="/dashboard">dashboard</a>
             </div>
         </div>
     )

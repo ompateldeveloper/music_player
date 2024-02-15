@@ -19,7 +19,7 @@ export default function DashboardCore() {
             //     console.log(arrayBuffer);
             // }
             // reader.readAsArrayBuffer(musicFile)
-            await axios.post('http://localhost:4000/api/v1/music',formData)
+            await axios.post('https://chords-r6bo.onrender.com/api/v1/music',formData)
             .then((data)=>{
                 setSongs([...songs,data.data])
             })
@@ -28,13 +28,13 @@ export default function DashboardCore() {
     onsubmit
     return (
         <div className='h-full p-4 pl-0 pb-0 '>
-            <div className="inner bg-zinc-800 h-full w-full rounded-md p-2">
+            <div className="inner bg-zinc-300 dark:bg-zinc-800 h-full w-full rounded-md p-2">
                 <div className="songs-nav flex items-center gap-2">
                     <div className="add-music-container flex items-center">
-                        <label htmlFor='add-music' className='text-xs px-4 py-2 bg-zinc-900 rounded-md flex items-center'>Add song <Plus className='w-4 ml-1' /></label>
+                        <label htmlFor='add-music' className='text-xs px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Add song <Plus className='w-4 ml-1' /></label>
                         <input type="file" className='hidden' accept="audio/*" name="" id="add-music" onChange={handleChange} />
                     </div>
-                    <button className='text-xs px-4 py-2 bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
+                    <button className='text-xs px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
                 </div>
                     {musicFile && (
                             <div className='flex'>
