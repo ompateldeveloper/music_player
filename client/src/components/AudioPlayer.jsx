@@ -1,8 +1,9 @@
-import { FastForward, Forward, NotepadText, Play, Rewind } from 'lucide-react'
+import { FastForward, Forward, NotepadText, Pause, Play, Rewind } from 'lucide-react'
 import React from 'react'
 import { cn } from "../lib/utils"
+import {useMusicContext} from '../contexts/MusicContextProvider'
 export default function AudioPlayer() {
-    
+    const {songs,setSongs,setSong,playSong,pauseSong,isPlaying} = useMusicContext();
     return (
         <div className='p-4 pl-0' >
             <div className="inner bg-zinc-300 dark:bg-zinc-800 rounded-md p-2">
@@ -11,7 +12,21 @@ export default function AudioPlayer() {
                 </div>
                 <div className="controls flex items-center justify-center gap-3">
                     <button className={cn('prev bg-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-600 dark:text-zinc-300 text-zinc-800 dark:bg-zinc-700 rounded-full h-10 w-10 pl-1.5',)}><Rewind/></button>
-                    <button className={cn('prev bg-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-600 dark:text-zinc-300 text-zinc-800 dark:bg-zinc-700 rounded-full h-12 w-12 pl-3.5',)}><Play/></button>
+                    <button className={cn('prev bg-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-600 dark:text-zinc-300 text-zinc-800 dark:bg-zinc-700 rounded-full h-12 w-12 text-center flex items-center justify-center',)} onClick={()=>{
+                        isPlaying
+                        ?
+                        pauseSong()
+                        :
+                        playSong()
+                    }}>
+                        {
+                            isPlaying
+                            ?
+                            <Pause/>
+                            :
+                            <Play/>
+                        }
+                    </button>
                     <button className={cn('prev bg-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-600 dark:text-zinc-300 text-zinc-800 dark:bg-zinc-700 rounded-full h-10 w-10 pl-2.5',)}><FastForward/></button>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { useMusicContext } from '../contexts/MusicContextProvider';
 
 export default function Song({ data, index }) {
     const [menu, setMenu] = useState(false);
-    const {songs,setSongs} = useMusicContext();
+    const {songs,setSongs,setSong,playSong} = useMusicContext();
     const handleDelete = async(e)=>{
         await axios.delete(`/api/v1/music/delete/${data._id}`)
         .then(()=>{
@@ -17,12 +17,15 @@ export default function Song({ data, index }) {
         })
     }
     const handleClick = () => {
-        
+        console.log(data.src);
+        setSong('/api/assets/'+data.src)
+        // playSong()
+
     }
     return (
         <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-sm' onClick={handleClick} >
             <div className="number ml-4  mr-2">{index + 1}.</div>
-            <div className="title select-none ">
+            <div className="title select-none truncate">
                 {data.title}
             </div>
             <div className="menu-container ml-auto relative">

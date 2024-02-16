@@ -29,7 +29,6 @@ export default function DashboardCore() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
             console.log(response.data);
         } catch (error) {
             console.error('Error uploading file:', error);

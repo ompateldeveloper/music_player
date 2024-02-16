@@ -10,7 +10,7 @@ export function MusicContextProvider({ children }) {
 
     const playSong = () => {
         if (currentSong) {
-            audio.src = currentSong; // Assuming currentSong is the URL of the song
+            // audio.src = currentSong; // Assuming currentSong is the URL of the song
             audio.play();
             setIsPlaying(true);
         }
@@ -23,15 +23,21 @@ export function MusicContextProvider({ children }) {
 
     const setSong = (song) => {
         setCurrentSong(song);
+        audio.src = song;
+        audio.play();
+        setIsPlaying(true);
     };
 
     const value = {
         songs,
         audio,
+        currentSong,
+        isPlaying,
         setSongs,
         playSong,
         pauseSong,
         setSong
+        
     }
     
     return (
