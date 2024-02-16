@@ -10,11 +10,14 @@ export function MusicContextProvider({ children }) {
 
     const playSong = () => {
         if (currentSong) {
-            // audio.src = currentSong; // Assuming currentSong is the URL of the song
+            // audio.src = currentSong;
             audio.play();
             setIsPlaying(true);
         }
     };
+    useEffect(()=>{
+        console.log('halo');
+    },[audio])
 
     const pauseSong = () => {
         audio.pause();
@@ -23,7 +26,8 @@ export function MusicContextProvider({ children }) {
 
     const setSong = (song) => {
         setCurrentSong(song);
-        audio.src = song;
+        
+        audio.src = 'https://chords-r6bo.onrender.com/api/assets/'+song.src;
         audio.play();
         setIsPlaying(true);
     };

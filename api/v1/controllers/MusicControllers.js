@@ -30,7 +30,7 @@ addOne = async (req, res) => {
             title: metadata.common.title || 'Unknown Title',
             artist: metadata.common.artist || 'Unknown Artist',
             album: metadata.common.album || 'Unknown Album',
-            // cover: metadata.common.picture ? metadata.common.picture[0].data.toString('base64') : null,
+            cover: metadata.common.picture ? metadata.common.picture[0].data.toString('base64') : null,
             src: audioFile.filename
         });
         console.log('song added');

@@ -24,7 +24,7 @@ export default function DashboardCore() {
         formData.append('audio', audioFile);
 
     
-        await axios.post('/api/v1/music', formData, {
+        await axios.post('https://chords-r6bo.onrender.com/api/v1/music', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

@@ -13,6 +13,9 @@ const songSchema = new mongoose.Schema({
     src:{
         type:String,
         required:true
+    },
+    cover:{
+        type:String,
     }
 })
 module.exports = mongoose.models.Task || mongoose.model("Song",songSchema);
