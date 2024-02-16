@@ -11,9 +11,9 @@ export default function DashboardCore() {
     const handleChange = (e) => {
         setAudioFile(e.target.files[0]);
     }
-
+    // useEffect(()=>{},[])
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevents the default form submission
+        e.preventDefault();
 
         if (!audioFile) {
             console.error('Please select an audio file');
@@ -23,16 +23,19 @@ export default function DashboardCore() {
         const formData = new FormData();
         formData.append('audio', audioFile);
 
-        try {
-            const response = await axios.post('/api/v1/music', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error('Error uploading file:', error);
-        }
+    
+        await axios.post('/api/v1/music', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((data)=>{
+            setSongs([...songs,data.data])
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+   
     };
     return (
         <div className='h-full p-4 pl-0 pb-0 '>
