@@ -7,7 +7,7 @@ import { useThemeContext } from "./contexts/ThemeContext"
 function App() {
     const {theme,setTheme}  = useThemeContext();
     return (
-        <div className={cn('App ',theme ? " dark:bg-zinc-100 dark":"bg-zinc-100")}>
+        <div className={cn('App ',theme=='dark' ? "dark:bg-zinc-100 dark":"bg-zinc-100")}>
             <Routes>
                 {/* <Route path={'/'} element={<Landing/>}/> */}
                 <Route path={'/'} element={<Dashboard/>}/>

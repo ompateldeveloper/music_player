@@ -4,13 +4,7 @@ import { Asterisk, Guitar, List, ListChecks, Mic, Moon, Plug, Plus, Sun } from '
 import { useThemeContext } from '../contexts/ThemeContext'
 export default function Sidebar() {
     const {theme,setTheme} = useThemeContext()
-    useEffect(() => {
-        if (theme) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-        }
-    }, [theme])
+
     return (
         <div className='h-screen min-w-64 p-4'>
             <div className="inner h-full bg-zinc-300 dark:bg-zinc-800 rounded-md overflow-hidden p-2 flex flex-col gap-2">
@@ -23,9 +17,9 @@ export default function Sidebar() {
                 <SidebarButton title='Genere' icon={<Guitar />} />
                 <SidebarButton title='PlayList' icon={<List />}  onClick = {()=>{document.documentElement.setAttribute('data-theme', 'light')}}/>
                 <SidebarButton title='Recently added' icon={<Plus />} />
-                <div className="theme-mode" onClick={() => { setTheme(!theme) }}>
+                <div className="theme-mode" onClick={() => { setTheme(theme==='dark'?'light':'dark') }}>
                     {
-                        theme
+                        theme==='dark'
                             ?
                             <Sun />
                             :

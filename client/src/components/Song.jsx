@@ -7,20 +7,22 @@ export default function Song({ data, index }) {
     const [menu, setMenu] = useState(false);
     const {songs,setSongs} = useMusicContext();
     const handleDelete = async(e)=>{
-        await axios.delete(`https://chords-r6bo.onrender.com/api/v1/music/delete/${data._id}`)
+        await axios.delete(`/api/v1/music/delete/${data._id}`)
         .then(()=>{
             const newSongs = songs.filter((song)=>{
-                console.log(data._id,song._id);
                 return data._id!==song._id;
             })
             setSongs(newSongs)
             console.log(newSongs);
         })
     }
+    const handleClick = () => {
+        
+    }
     return (
-        <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-sm' >
+        <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-sm' onClick={handleClick} >
             <div className="number ml-4  mr-2">{index + 1}.</div>
-            <div className="title">
+            <div className="title select-none ">
                 {data.title}
             </div>
             <div className="menu-container ml-auto relative">

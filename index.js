@@ -17,7 +17,17 @@ const PORT = process.env.PORT;
 
 
 app.use('/api',route);
-// app.use(express.static(path.join(__dirname, 'client', 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/public/:filename', (req, res) => {
+    try {
+        const {filename} = req.params
+        res.sendFile(path.join(__dirname, 'public','uploads',filename));
+        
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
@@ -27,7 +37,6 @@ app.use('/api',route);
 mongoose.connect(process.env.MONGO_URI ||'')
 .then(()=>{
     app.listen(PORT || 4000,()=>{
-    
         console.log('http://localhost:'+PORT);
     })
 })

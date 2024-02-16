@@ -10,5 +10,9 @@ const songSchema = new mongoose.Schema({
     album:{
         type:String,
     },
+    src:{
+        type:String,
+        required:true
+    }
 })
 module.exports = mongoose.models.Task || mongoose.model("Song",songSchema);

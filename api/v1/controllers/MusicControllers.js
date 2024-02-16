@@ -1,5 +1,6 @@
 const Song = require('../models/Song')
-getAll = async(req,res)=>{
+const mm = require('music-metadata');
+getAll = async (req, res) => {
     try {
         const allSongs = await Song.find();
         res.json(allSongs)
@@ -7,28 +8,41 @@ getAll = async(req,res)=>{
         res.status(404).json(error)
     }
 }
-getOne = async(req,res)=>{
+getOne = async (req, res) => {
     try {
-        const id = req.params.id 
+        const id = req.params.id
         const oneSong = await Song.findOne(id);
         res.json(allSongs)
     } catch (error) {
         res.status(404).json(error)
     }
 }
-addOne = async(req,res)=>{
+addOne = async (req, res) => {
     try {
         const body = req.body
-        const createdSong = await Song.create(body);
-        console.log(createdSong);
+        const audioFile = req.file
+
+        if (!audioFile) {
+            return res.status(400).json({ error: 'Please upload an audio file' });
+        }
+        const metadata = await mm.parseFile('public/uploads/' + audioFile.filename);
+        const createdSong = await Song.create({
+            title: metadata.common.title || 'Unknown Title',
+            artist: metadata.common.artist || 'Unknown Artist',
+            album: metadata.common.album || 'Unknown Album',
+            // cover: metadata.common.picture ? metadata.common.picture[0].data.toString('base64') : null,
+            src: 'uploads/' + audioFile.filename
+        });
+        console.log('song added');
         res.json(createdSong)
     } catch (error) {
-        res.status(404).json(error)
+        console.log(error);
+        res.status(401).json(error)
     }
 }
-deleteOne = async(req,res)=>{
+deleteOne = async (req, res) => {
     try {
-        const id = req.params.id 
+        const id = req.params.id
         const deleteMsg = await Song.findByIdAndDelete(id);
         console.log(deleteMsg);
         res.json(deleteMsg)
@@ -36,7 +50,7 @@ deleteOne = async(req,res)=>{
         res.status(404).json(error)
     }
 }
-editOne = async(req,res)=>{
+editOne = async (req, res) => {
     try {
         const body = req.body
         const updatedSong = await Song.findByIdAndUpdate(body._id, body, {
@@ -48,4 +62,4 @@ editOne = async(req,res)=>{
         res.status(404).json(error)
     }
 }
-module.exports ={getAll,getOne,addOne,deleteOne,editOne}
+module.exports = { getAll, getOne, addOne, deleteOne, editOne }
