@@ -6,7 +6,8 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:'https://chords-r6bo.onrender.com/',
+        // target:'https://chords-r6bo.onrender.com/',
+        target:'http://localhost:4000/',
         changeOrigin:true
       }
     }

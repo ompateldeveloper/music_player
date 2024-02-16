@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { cn } from '../lib/utils'
 import { Asterisk, Guitar, List, ListChecks, Mic, Moon, Plug, Plus, Sun } from 'lucide-react'
+import { useThemeContext } from '../contexts/ThemeContext'
 export default function Sidebar() {
-    const [theme,setTheme] = useState(false);
+    const {theme,setTheme} = useThemeContext()
     useEffect(() => {
         if (theme) {
             document.documentElement.setAttribute('data-theme', 'dark');

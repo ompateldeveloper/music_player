@@ -28,7 +28,7 @@ export default function DashboardCore() {
     onsubmit
     return (
         <div className='h-full p-4 pl-0 pb-0 '>
-            <div className="inner bg-zinc-300 dark:bg-zinc-800 h-full w-full rounded-md p-2">
+            <div className="inner bg-zinc-300  dark:bg-zinc-800 h-full w-full rounded-md p-2">
                 <div className="songs-nav flex items-center gap-2">
                     <div className="add-music-container flex items-center">
                         <label htmlFor='add-music' className='text-xs px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Add song <Plus className='w-4 ml-1' /></label>

@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {},
   },
-  darkMode:['media','class'],
+  darkMode:'class',
   plugins: [
     // require('tailwindcss-dark-mode')()
   ],

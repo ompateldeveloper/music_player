@@ -2,10 +2,12 @@ import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Dashboard from "./pages/Dashboard"
 import Landing from "./pages/Landing"
-
+import {cn} from './lib/utils'
+import { useThemeContext } from "./contexts/ThemeContext"
 function App() {
+    const {theme,setTheme}  = useThemeContext();
     return (
-        <div className="App bg-zinc-100 dark:bg-zinc-900 dark">
+        <div className={cn('App ',theme ? " dark:bg-zinc-100 dark":"bg-zinc-100")}>
             <Routes>
                 {/* <Route path={'/'} element={<Landing/>}/> */}
                 <Route path={'/'} element={<Dashboard/>}/>
