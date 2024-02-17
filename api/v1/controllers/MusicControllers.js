@@ -8,15 +8,14 @@ getAll = async (req, res) => {
         res.status(404).json(error)
     }
 }
-getOne = async (req, res) => {
+getAllByArtist = async (req,res) => {
     try {
-        const id = req.params.id
-        const oneSong = await Song.findOne(id);
-        res.json(allSongs)
+        const byArtist = await Song.find()
     } catch (error) {
-        res.status(404).json(error)
+        
     }
 }
+
 addOne = async (req, res) => {
     try {
         const body = req.body
@@ -26,11 +25,18 @@ addOne = async (req, res) => {
             return res.status(400).json({ error: 'Please upload an audio file' });
         }
         const metadata = await mm.parseFile('public/uploads/' + audioFile.filename);
+
+        const imageBuffer = metadata.common.picture ? metadata.common.picture[0].data : null;
+        if (imageBuffer) {
+          const imagePath = 'public/uploads/' + audioFile.filename.replace('.mp3', '.jpg');
+          fs.writeFileSync(imagePath, imageBuffer);
+        }
+
         const createdSong = await Song.create({
             title: metadata.common.title || 'Unknown Title',
             artist: metadata.common.artist || 'Unknown Artist',
             album: metadata.common.album || 'Unknown Album',
-            cover: metadata.common.picture ? metadata.common.picture[0].data.toString('base64') : null,
+            cover: imageBuffer ? audioFile.filename.replace('.mp3', '.jpg') : null,
             src: audioFile.filename
         });
         console.log('song added');
@@ -50,16 +56,16 @@ deleteOne = async (req, res) => {
         res.status(404).json(error)
     }
 }
-editOne = async (req, res) => {
-    try {
-        const body = req.body
-        const updatedSong = await Song.findByIdAndUpdate(body._id, body, {
-            new: true,
-        });
-        console.log(updatedSong);
-        res.json(updatedSong)
-    } catch (error) {
-        res.status(404).json(error)
-    }
-}
-module.exports = { getAll, getOne, addOne, deleteOne, editOne }
+// editOne = async (req, res) => {
+//     try {
+//         const body = req.body
+//         const updatedSong = await Song.findByIdAndUpdate(body._id, body, {
+//             new: true,
+//         });
+//         console.log(updatedSong);
+//         res.json(updatedSong)
+//     } catch (error) {
+//         res.status(404).json(error)
+//     }
+// }
+module.exports = { getAll, addOne, deleteOne }

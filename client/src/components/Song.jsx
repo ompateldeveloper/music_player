@@ -13,6 +13,7 @@ export default function Song({ data, index }) {
                 return data._id!==song._id;
             })
             setSongs(newSongs)
+            setMenu(false)
             console.log(newSongs);
         })
     }
@@ -24,7 +25,7 @@ export default function Song({ data, index }) {
     }
     return (
         <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-sm' onClick={handleClick} >
-            <div className="number ml-4  mr-2 w-6 h-6 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover' src={data?.cover}/>}</div>
+            <div className="number ml-4  mr-2 w-6 h-6 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover rounded-md' src={'https://chords-r6bo.onrender.com/api/assets/'+data?.cover}/>}</div>
             <div className="title select-none truncate">
                 {data.title}
             </div>
