@@ -4,8 +4,9 @@ import Song from './Song'
 import axios from 'axios'
 export default function SongsList() {
     const {songs,setSongs} = useMusicContext()
+    
     async function fetchSongs(){
-        await axios.get('https://chords-r6bo.onrender.com/api/v1/music')
+        await axios.get('https://musicplayer-production-4f79.up.railway.app/api/v1/music')
         .then((data)=>{
             setSongs(data.data)
         })

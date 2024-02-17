@@ -5,9 +5,19 @@ import { useMusicContext } from '../contexts/MusicContextProvider';
 
 export default function Song({ data, index }) {
     const [menu, setMenu] = useState(false);
-    const {songs,setSongs,setSong,playSong,currentSong} = useMusicContext();
+    const {audio,songs,setSongs,currentSong,setCurrentSong,setIsPlaying} = useMusicContext();
+
+
+    const setSong = (song) => {
+        setCurrentSong(song);
+        audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/'+song.src;
+        audio.play();
+        setIsPlaying(true);
+    };
+
+
     const handleDelete = async(e)=>{
-        await axios.delete(`https://chords-r6bo.onrender.com/api/v1/music/delete/${data._id}`)
+        await axios.delete(`https://musicplayer-production-4f79.up.railway.app/api/v1/music/delete/${data._id}`)
         .then(()=>{
             const newSongs = songs.filter((song)=>{
                 return data._id!==song._id;
@@ -25,7 +35,7 @@ export default function Song({ data, index }) {
     }
     return (
         <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-sm' onClick={handleClick} >
-            <div className="number ml-4  mr-2 w-6 h-6 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover rounded-md' src={'https://chords-r6bo.onrender.com/api/assets/'+data?.cover}/>}</div>
+            <div className="number ml-4  mr-2 w-16 h-12 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover rounded-md' src={'https://musicplayer-production-4f79.up.railway.app/api/assets/'+data?.cover}/>}</div>
             <div className="title select-none truncate">
                 {data.title}
             </div>

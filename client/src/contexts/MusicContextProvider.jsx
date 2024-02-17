@@ -8,29 +8,11 @@ export function MusicContextProvider({ children }) {
     const [currentSong, setCurrentSong] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const playSong = () => {
-        if (currentSong) {
-            // audio.src = currentSong;
-            audio.play();
-            setIsPlaying(true);
-        }
-    };
     useEffect(()=>{
-        console.log('halo');
-    },[audio])
+        audio.addEventListener('timeupdate',()=>{
 
-    const pauseSong = () => {
-        audio.pause();
-        setIsPlaying(false);
-    };
-
-    const setSong = (song) => {
-        setCurrentSong(song);
-        
-        audio.src = 'https://chords-r6bo.onrender.com/api/assets/'+song.src;
-        audio.play();
-        setIsPlaying(true);
-    };
+        })
+    },[])
 
     const value = {
         songs,
@@ -38,10 +20,8 @@ export function MusicContextProvider({ children }) {
         currentSong,
         isPlaying,
         setSongs,
-        playSong,
-        pauseSong,
-        setSong
-        
+        setCurrentSong,
+        setIsPlaying
     }
     
     return (

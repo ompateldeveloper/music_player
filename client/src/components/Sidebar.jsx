@@ -6,7 +6,7 @@ export default function Sidebar() {
     const {theme,setTheme} = useThemeContext()
 
     return (
-        <div className='h-screen min-w-64 p-4'>
+        <div className='h-screen min-w-64 p-4 relative'>
             <div className="inner h-full bg-zinc-300 dark:bg-zinc-800 rounded-md overflow-hidden p-2 flex flex-col gap-2">
                 <div className="logo flex flex-col items-center justify-center">
                     <img src="./logo.png" className='h-10 dark:invert ' alt="" />
@@ -17,7 +17,7 @@ export default function Sidebar() {
                 <SidebarButton title='Genere' icon={<Guitar />} />
                 <SidebarButton title='PlayList' icon={<List />}  onClick = {()=>{document.documentElement.setAttribute('data-theme', 'light')}}/>
                 <SidebarButton title='Recently added' icon={<Plus />} />
-                <div className="theme-mode" onClick={() => { setTheme(theme==='dark'?'light':'dark') }}>
+                <div className="theme-mode absolute bottom-5 left-5" onClick={() => { setTheme(theme==='dark'?'light':'dark') }}>
                     {
                         theme==='dark'
                             ?
