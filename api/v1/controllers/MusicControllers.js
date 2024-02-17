@@ -1,5 +1,6 @@
 const Song = require('../models/Song')
 const mm = require('music-metadata');
+const fs = require('fs')
 getAll = async (req, res) => {
     try {
         const allSongs = await Song.find();
@@ -28,7 +29,7 @@ addOne = async (req, res) => {
 
         const imageBuffer = metadata.common.picture ? metadata.common.picture[0].data : null;
         if (imageBuffer) {
-          const imagePath = 'public/uploads/' + audioFile.filename.replace('.mp3', '.jpg');
+          const imagePath = 'public/uploads/' + audioFile.filename.split('.')[0]+'.jpg';
           fs.writeFileSync(imagePath, imageBuffer);
         }
 
@@ -36,7 +37,7 @@ addOne = async (req, res) => {
             title: metadata.common.title || 'Unknown Title',
             artist: metadata.common.artist || 'Unknown Artist',
             album: metadata.common.album || 'Unknown Album',
-            cover: imageBuffer ? audioFile.filename.replace('.mp3', '.jpg') : null,
+            cover: imageBuffer ? audioFile.filename.split('.')[0]+'.jpg': null,
             src: audioFile.filename
         });
         console.log('song added');
