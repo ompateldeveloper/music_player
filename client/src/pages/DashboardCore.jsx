@@ -4,6 +4,7 @@ import { Edit, HeadphonesIcon, Pen, Plus, Upload } from 'lucide-react'
 import { useMusicContext } from '../contexts/MusicContextProvider';
 import axios from 'axios';
 import MusicForm from './Music';
+import { useEffect } from 'react';
 export default function DashboardCore() {
     const { songs, setSongs } = useMusicContext();
     const [audioFile, setAudioFile] = useState(null);
@@ -11,9 +12,13 @@ export default function DashboardCore() {
     const handleChange = (e) => {
         setAudioFile(e.target.files[0]);
     }
-    // useEffect(()=>{},[])
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    useEffect(()=>{
+        if(audioFile){
+            handleUpload()
+        }
+    },[audioFile])
+    const handleUpload = async (e) => {
+        // e.preventDefault();
 
         if (!audioFile) {
             console.error('Please select an audio file');
@@ -31,6 +36,7 @@ export default function DashboardCore() {
         })
         .then((data)=>{
             setSongs([...songs,data.data])
+            setAudioFile(null)
         })
         .catch((error)=>{
             console.log(error);
@@ -41,7 +47,7 @@ export default function DashboardCore() {
         <div className='h-full p-4 pl-0 pb-0 '>
             <div className="inner bg-zinc-200  dark:bg-zinc-800 h-full w-full rounded-md p-2">
                 <div className="songs-nav flex items-center gap-2">
-                    <form className="add-music-container flex items-center gap-1" onSubmit={handleSubmit}>
+                    <form className="add-music-container flex items-center gap-1" >
                         <label htmlFor='add-music' className='text-xs px-4 py-2 bg-zinc-200 dark:bg-zinc-900 rounded-md max-w-32'>
                             {
                                 !audioFile
@@ -54,7 +60,7 @@ export default function DashboardCore() {
                             }
                         </label>
                         <input type="file" className='hidden' accept="audio/*" id="add-music" onChange={handleChange} />
-                        {audioFile && <button className='text-xs px-4 py-2 bg-green-400 dark:bg-green-700 rounded-md flex items-center' ><Upload className='w-3.5 ' /></button>}
+                        {/* {audioFile && <button className='text-xs px-4 py-2 bg-green-400 dark:bg-green-700 rounded-md flex items-center' ><Upload className='w-3.5 ' /></button>} */}
                     </form>
                     <button className='text-xs px-4 py-2 select-none bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
                 </div>

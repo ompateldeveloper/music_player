@@ -17,7 +17,7 @@ export default function Sidebar() {
                 <SidebarButton title='Genere' icon={<Guitar />} />
                 <SidebarButton title='PlayList' icon={<List />}  onClick = {()=>{document.documentElement.setAttribute('data-theme', 'light')}}/>
                 <SidebarButton title='Recently added' icon={<Plus />} />
-                <div className="theme-mode absolute bottom-5 left-5" onClick={() => { setTheme(theme==='dark'?'light':'dark') }}>
+                <div className="theme-mode absolute bottom-5 p-1.5 bg-zinc-100 dark:bg-zinc-700 rounded-md   left-5" onClick={() => { setTheme(theme==='dark'?'light':'dark') }}>
                     {
                         theme==='dark'
                             ?

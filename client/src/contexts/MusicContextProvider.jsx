@@ -12,6 +12,10 @@ export function MusicContextProvider({ children }) {
         audio.addEventListener('timeupdate',()=>{
             
         })
+        return()=>{
+            audio.src=''; 
+            setCurrentSong(null)
+        }
     },[])
 
     const value = {
