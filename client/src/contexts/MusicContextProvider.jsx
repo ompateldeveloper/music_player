@@ -10,7 +10,7 @@ export function MusicContextProvider({ children }) {
 
     useEffect(()=>{
         audio.addEventListener('timeupdate',()=>{
-
+            
         })
     },[])
 

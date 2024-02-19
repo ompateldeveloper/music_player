@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Cross, MoreVertical, X } from 'lucide-react';
 import React, { useState } from 'react'
 import { useMusicContext } from '../contexts/MusicContextProvider';
-
+import {cn} from  "../lib/utils"
 export default function Song({ data, index }) {
     const [menu, setMenu] = useState(false);
     const {audio,songs,setSongs,currentSong,setCurrentSong,setIsPlaying} = useMusicContext();
@@ -34,8 +34,8 @@ export default function Song({ data, index }) {
         }
     }
     return (
-        <div className='w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-sm' onClick={handleClick} >
-            <div className="number ml-4  mr-2 w-16 h-12 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover rounded-md' src={'https://musicplayer-production-4f79.up.railway.app/api/assets/'+data?.cover}/>}</div>
+        <div className={cn('w-full flex items-center justify-start py-1.5 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md ',currentSong?._id==data._id?"bg-gradient-to-br from-pink-300 to-violet-400 dark:from-pink-600 dark:to-violet-700 ":"")} onClick={handleClick} >
+            <div className="number mx-2 w-16 h-12 overflow-hidden">{data?.cover && <img className='h-full w-full object-cover rounded-md' src={'https://musicplayer-production-4f79.up.railway.app/api/assets/'+data?.cover}/>}</div>
             <div className="title select-none truncate">
                 {data.title}
             </div>
