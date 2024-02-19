@@ -4,7 +4,6 @@ import Song from './Song'
 import axios from 'axios'
 export default function SongsList() {
     const {songs,setSongs} = useMusicContext()
-    
     async function fetchSongs(){
         await axios.get('https://musicplayer-production-4f79.up.railway.app/api/v1/music')
         .then((data)=>{
@@ -22,7 +21,7 @@ export default function SongsList() {
         fetchSongs()
     },[])
     return (
-        <div className='my-4 overflow-y-auto h-[57vh] '>
+        <div className='my-4 overflow-y-auto h-[57vh] songs-list pr-1'>
             {
                 songs &&
                 songs?.map((data,index)=>(

@@ -7,22 +7,25 @@ export function MusicContextProvider({ children }) {
     const [songs,setSongs] = useState();
     const [currentSong, setCurrentSong] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [tab, setTab] = useState(0);
+
 
     useEffect(()=>{
-        audio.addEventListener('timeupdate',()=>{
-            
-        })
         return()=>{
             audio.src=''; 
             setCurrentSong(null)
         }
     },[])
 
+
+
     const value = {
         songs,
         audio,
         currentSong,
         isPlaying,
+        tab,
+        setTab,
         setSongs,
         setCurrentSong,
         setIsPlaying

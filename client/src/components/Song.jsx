@@ -10,6 +10,7 @@ export default function Song({ data, index }) {
 
     const setSong = (song) => {
         setCurrentSong(song);
+        console.log(currentSong);
         audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/'+song.src;
         audio.play();
         setIsPlaying(true);
@@ -29,7 +30,6 @@ export default function Song({ data, index }) {
         })
     }
     const handleClick = () => {
-        console.log(data.src);
         if(currentSong?._id!==data._id){   
             setSong(data)
         }

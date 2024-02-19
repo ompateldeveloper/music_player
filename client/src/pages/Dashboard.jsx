@@ -7,10 +7,10 @@ import AddSongModal from '../components/AddSongModal'
 
 export default function Dashboard() {
     return (
-        <div className='dark:text-zinc-100 dark:bg-zinc-900 h-screen flex items-center  '>
-            <Sidebar />
+        <div className='dark:text-zinc-100 dark:bg-zinc-900 h-screen flex items-center overflow-hidden '>
             <MusicContextProvider>
-                <div className="h-screen w-full flex flex-col flex-grow-0 relative">
+                <Sidebar />
+                <div className="h-screen w-full flex flex-col flex-grow-0 relative pl-2">
                     <DashboardCore />
                     <AudioPlayer />
                 </div>

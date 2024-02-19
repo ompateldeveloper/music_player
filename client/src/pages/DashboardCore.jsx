@@ -3,7 +3,6 @@ import SongsList from '../components/SongsList'
 import { Edit, HeadphonesIcon, Pen, Plus, Upload } from 'lucide-react'
 import { useMusicContext } from '../contexts/MusicContextProvider';
 import axios from 'axios';
-import MusicForm from './Music';
 import { useEffect } from 'react';
 export default function DashboardCore() {
     const { songs, setSongs } = useMusicContext();
@@ -41,7 +40,6 @@ export default function DashboardCore() {
         .catch((error)=>{
             console.log(error);
         })
-   
     };
     return (
         <div className='h-full p-4 pl-0 pb-0 '>
@@ -64,7 +62,6 @@ export default function DashboardCore() {
                     </form>
                     <button className='text-xs px-4 py-2 select-none bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
                 </div>
-                {/* <MusicForm /> */}
                 <SongsList />
             </div>
         </div>

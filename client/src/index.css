@@ -7,3 +7,20 @@
     font-optical-sizing: auto;
     font-weight: 700;
 }
+.songs-list::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+}
+.songs-list::-webkit-scrollbar {
+    width: 10px;
+}
+.songs-list::-webkit-scrollbar-track {
+    @apply bg-zinc-700 rounded-full ;
+}
+.songs-list::-webkit-scrollbar-thumb {
+    @apply bg-zinc-500; 
+}
+  
+  /* Handle on hover */
+.songs-list::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400;
+}
