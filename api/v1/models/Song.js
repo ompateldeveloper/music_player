@@ -16,6 +16,9 @@ const songSchema = new mongoose.Schema({
     },
     cover:{
         type:String,
+    },
+    lyrics:{
+        type:String,
     }
 })
 module.exports = mongoose.models.Task || mongoose.model("Song",songSchema);

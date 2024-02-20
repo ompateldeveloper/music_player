@@ -32,12 +32,13 @@ addOne = async (req, res) => {
           const imagePath = 'public/uploads/' + audioFile.filename.split('.')[0]+'.jpg';
           fs.writeFileSync(imagePath, imageBuffer);
         }
-
+        console.log(metadata?.common?.lyrics);
         const createdSong = await Song.create({
             title: metadata.common.title || 'Unknown Title',
             artist: metadata.common.artist || 'Unknown Artist',
             album: metadata.common.album || 'Unknown Album',
             cover: imageBuffer ? audioFile.filename.split('.')[0]+'.jpg': null,
+            lyrics: metadata.common.lyrics?.toString() || "No Lyrics",
             src: audioFile.filename
         });
         console.log('song added');

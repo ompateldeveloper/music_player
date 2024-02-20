@@ -74,7 +74,7 @@ export default function AudioPlayer() {
                     {currentSong?<div className="text-xs m-2 ">{formatTime(audio.currentTime)}</div>:<div className="text-xs m-2 text-zinc-400 text-nowrap">--:--</div>}
                     <div className="w-full flex items-center relative ">
                         <input id="small-range" type="range" min={0} max={audio.duration} step={0.1} value={progress} onChange={handleProgress}  className="w-full opacity-0 z-10 bg-gray-300 rounded-lg appearance-none cursor-pointer range-sm  dark:bg-gray-700 " />
-                        <div className="absolute w-full rounded-full overflow-hidden bg-zinc-700 h-1.5">
+                        <div className="absolute w-full rounded-full overflow-hidden bg-zinc-300 dark:bg-zinc-700 h-1.5">
                             <div className={`h-full bg-white bg-opacity-70 rounded-sm `} style={{width:`${(progress/audio.duration)*100}%`}}></div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ export default function AudioPlayer() {
                             </div>
                     </div>
                 </div>
-                <div className="" onClick={()=>{console.log(currentSong);}}>ao</div>
+                {/* <div className="" onClick={()=>{console.log(currentSong);}}>ao</div> */}
                 {full&&<div className="lyrics flex items-center justify-center min-h-96">
                     <span>No lyrics </span>
                 </div>}

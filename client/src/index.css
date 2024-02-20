@@ -14,13 +14,13 @@
     width: 10px;
 }
 .songs-list::-webkit-scrollbar-track {
-    @apply bg-zinc-700 rounded-full ;
+    @apply dark:bg-zinc-700 bg-zinc-300 rounded-full ;
 }
 .songs-list::-webkit-scrollbar-thumb {
-    @apply bg-zinc-500; 
+    @apply bg-zinc-100 dark:bg-zinc-500 ; 
 }
   
   /* Handle on hover */
 .songs-list::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-400;
+    @apply bg-zinc-50 dark:bg-zinc-400;
 }
