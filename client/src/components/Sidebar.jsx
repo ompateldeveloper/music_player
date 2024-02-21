@@ -41,7 +41,7 @@ export default function Sidebar() {
 function SidebarButton({  title, icon,tabIndex }) {
     const {tab,setTab} = useMusicContext()
     return (
-        <button className={cn(' duration-200 bg-gradient-to-br hover:bg-opacity-40 bg-zinc-700 h-10 w-full rounded-sm text-start pl-2 font-semibold text-sm dark:text-zinc-300 flex items-center',tab===tabIndex&&"bg-gradient-to-br from-pink-300 to-violet-400 dark:from-pink-600 dark:to-violet-700 hover: ")} onClick={()=>{setTab(tabIndex)}}>
+        <button className={cn(' duration-200 bg-gradient-to-br bg-zinc-300 hover:bg-opacity-40 dark:hover:bg-opacity-40 dark:bg-zinc-700 h-10 w-full rounded-sm text-start pl-2 font-semibold text-sm dark:text-zinc-300 flex items-center',tab===tabIndex&&"bg-gradient-to-br from-pink-300 to-violet-400 dark:from-pink-600 dark:to-violet-700 hover: ")} onClick={()=>{setTab(tabIndex)}}>
             {icon &&
                 <div className="mr-1">
                     {icon}

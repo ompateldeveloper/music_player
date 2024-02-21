@@ -5,6 +5,9 @@ import {useMusicContext} from '../contexts/MusicContextProvider'
 export default function AudioPlayer() {
     const {songs,audio,currentSong,setCurrentSong,isPlaying,setIsPlaying } = useMusicContext();
     const [progress,setProgress] = useState(0)
+    const repeatModes = ['off','category','song','single'];
+    const [repeat,setRepeat] = useState('off') //off, category, song, single
+    useEffect(()=>{console.log(repeat)},[repeat])
     const [volume,setVolume] = useState(1)
     const [full,setFull] = useState(false);
     const playSong = () => {
@@ -54,9 +57,7 @@ export default function AudioPlayer() {
         const timeupdate = audio.addEventListener('timeupdate',async (e)=>{
             setProgress(audio.currentTime);
             console.log(audio.ended);
-            // if (audio.ended) playNextSong();
         })
-
     },[])
 
     useEffect(()=>{
@@ -64,7 +65,6 @@ export default function AudioPlayer() {
             playNextSong();
             console.log('ended');
         })
-
     },[currentSong])
 
     return (
@@ -117,31 +117,34 @@ export default function AudioPlayer() {
                         ><SkipForward/></button>
                     </div>
                     <div className="flex items-center ml-auto m-4 ">
-                            <div className={cn("volume flex items-center gap-2 group overflow-hidden",!currentSong&&"")}>
-                                <label htmlFor="audio-vol">
-                                    {
-                                        volume<=0?
-                                        <VolumeX/>
+                        <div className="repeat-mode">
+
+                        </div>
+                        <div className={cn("volume flex items-center gap-2 group overflow-hidden",!currentSong&&"")}>
+                            <label htmlFor="audio-vol">
+                                {
+                                    volume<=0?
+                                    <VolumeX/>
+                                    :
+                                        volume<0.2
+                                        ?
+                                        <Volume/>
                                         :
-                                            volume<0.2
+                                        volume<0.8
                                             ?
-                                            <Volume/>
+                                            <Volume1/>
                                             :
-                                            volume<0.8
-                                                ?
-                                                <Volume1/>
-                                                :
-                                                <Volume2/>
-                                    }
-                                </label>
-                                <input type="range" id='audio-vol' min={0} max={1} step={0.01} value={volume} onChange={(e)=>{
-                                    setVolume(e.target.value)
-                                    audio.volume=e.target.value
-                                }} className=' bg-gray-300 rounded-lg appearance-none cursor-pointer range-sm  dark:bg-gray-700 w-0 opacity-0 group-hover:opacity-100 group-hover:w-20 duration-150 '/>
-                            </div>
-                            <div className="">
-                                <ChevronUpIcon className={cn(full&&"rotate-180")} onClick={()=>{setFull(!full)}}/>
-                            </div>
+                                            <Volume2/>
+                                }
+                            </label>
+                            <input type="range" id='audio-vol' min={0} max={1} step={0.01} value={volume} onChange={(e)=>{
+                                setVolume(e.target.value)
+                                audio.volume=e.target.value
+                            }} className=' bg-gray-300 rounded-lg appearance-none cursor-pointer range-sm  dark:bg-gray-700 w-0 opacity-0 group-hover:opacity-100 group-hover:w-20 duration-150 '/>
+                        </div>
+                        <div className="">
+                            <ChevronUpIcon className={cn(full&&"rotate-180")} onClick={()=>{setFull(!full)}}/>
+                        </div>
                     </div>
                 </div>
                 {/* <div className="" onClick={()=>{console.log(currentSong);}}>ao</div> */}
