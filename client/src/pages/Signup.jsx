@@ -55,7 +55,7 @@ export default function Signup() {
             </button>
             <div className="not-user text-gray-400 m-3 text-sm">
                 Already a User? &nbsp;
-                <Link href={'/signin'} className="text-violet-500" >Sign In</Link>
+                <Link to={'/signin'} className="text-violet-500" >Sign In</Link>
             </div>
         </form>
     )

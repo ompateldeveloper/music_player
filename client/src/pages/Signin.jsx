@@ -52,7 +52,7 @@ export default function Signin() {
             </button>
             <div className="not-user text-gray-400 m-3 text-sm">
                 Not User? &nbsp;
-                <Link href={'/signup'} className="text-violet-500" >Sign Up</Link>
+                <Link to={'/signup'} className="text-violet-500" >Sign Up</Link>
             </div>
         </form>
     )
