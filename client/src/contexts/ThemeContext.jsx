@@ -4,6 +4,7 @@ const themeContext = createContext();
 
 export function ThemeContextProvider({ children }) {
   const [theme, setTheme] = useState('dark');
+  const [dominantColor, setDominantColor] = useState('transparent');
 
   useEffect(() => {
     const savedTheme = JSON.parse(localStorage.getItem('theme'));

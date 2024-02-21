@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import SongsList from '../components/SongsList'
-import { Edit, HeadphonesIcon, Pen, Plus, Upload } from 'lucide-react'
+import { Edit, Plus } from 'lucide-react'
 import { useMusicContext } from '../contexts/MusicContextProvider';
 import axios from 'axios';
 import { useEffect } from 'react';
+import {cn} from '../lib/utils';
 export default function DashboardCore() {
     const { songs, setSongs } = useMusicContext();
     const [audioFile, setAudioFile] = useState(null);
+    const [edit, setEdit] = useState(false);
 
     const handleChange = (e) => {
         setAudioFile(e.target.files[0]);
@@ -60,9 +62,9 @@ export default function DashboardCore() {
                         <input type="file" className='hidden' accept="audio/*" id="add-music" onChange={handleChange} />
                         {/* {audioFile && <button className='text-xs px-4 py-2 bg-green-400 dark:bg-green-700 rounded-md flex items-center' ><Upload className='w-3.5 ' /></button>} */}
                     </form>
-                    <button className='text-xs px-4 py-2 select-none bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center'>Edit <Edit className='w-3.5 ml-1' /></button>
+                    <button className={cn('text-xs px-4 py-2 select-none bg-zinc-200 dark:bg-zinc-900 rounded-md flex items-center ',edit&&"underline")} onClick={()=>{setEdit(!edit)}}>Edit <Edit className='w-3.5 ml-1' /></button>
                 </div>
-                <SongsList />
+                <SongsList edit={edit} />
             </div>
         </div>
     )

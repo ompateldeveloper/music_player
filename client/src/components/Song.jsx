@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Cross, MoreVertical, X } from 'lucide-react';
 import React, { useState } from 'react'
 import { useMusicContext } from '../contexts/MusicContextProvider';
 import {cn} from  "../lib/utils"
+import { Play, PlayCircle, PlayIcon } from 'lucide-react';
 export default function Song({ data, index }) {
     const [menu, setMenu] = useState(false);
     const {audio,songs,setSongs,currentSong,setCurrentSong,setIsPlaying} = useMusicContext();
@@ -10,25 +10,13 @@ export default function Song({ data, index }) {
 
     const setSong = (song) => {
         setCurrentSong(song);
-        console.log(currentSong);
         audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/'+song.src;
         audio.play();
         setIsPlaying(true);
     };
 
 
-    const handleDelete = async(e)=>{
-        await axios.delete(`https://musicplayer-production-4f79.up.railway.app/api/v1/music/delete/${data._id}`)
-        .then(()=>{
-            const newSongs = songs.filter((song)=>{
-                return data._id!==song._id;
-            })
-            setSongs(newSongs)
-            setMenu(false)
-            setCurrentSong(null)
-            console.log(newSongs);
-        })
-    }
+
     const handleClick = () => {
         if(currentSong?._id!==data._id){   
             setSong(data)
@@ -40,18 +28,8 @@ export default function Song({ data, index }) {
             <div className="title select-none truncate">
                 {data.title}
             </div>
-            <div className="menu-container ml-auto relative">
-                <div className="menu-btn  w-6 mr-1 rounded-full hover:bg-zinc-600" onClick={() => { setMenu(!menu) }}><MoreVertical /></div>
-                {
-                    menu &&
-                    (
-                        <div className="menu absolute bg-zinc-700 w-32 z-50 left-1/2 top-1/2 -translate-x-full rounded shadow-md grid ">
-                            <button className="close bg-zinc-800 rounded-full w-4 h-4 m-1 " onClick={()=>{setMenu(false)}}><X className='h-4 w-4'/></button>
-                            <button className='h-6 bg-zinc-700 hover:bg-zinc-600' onClick={handleDelete}>Delete</button>
-                            <button className='h-6 bg-zinc-700 hover:bg-zinc-600'>Edit</button>
-                        </div>
-                    )
-                }
+            <div className="menu-container ml-auto relative ">
+                <Play className={cn('scale-75 m-1 fill-zinc-300 stroke-zinc-300',currentSong?._id!==data._id&&"fill-zinc-500 stroke-zinc-500")}/>
             </div>
         </div>
     )

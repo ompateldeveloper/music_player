@@ -9,7 +9,7 @@ function App() {
     const { theme, setTheme } = useThemeContext();
     const {user} = useAuthContext()
     return (
-        <div className={cn('App ', theme == 'dark' ? "dark:bg-zinc-100 dark" : "bg-zinc-100")}>
+        <div className={cn('App ', theme == 'dark' ? "dark:bg-zinc-100 dark" : "bg-zinc-100 text-zinc-800")}>
             <Routes>
                 {/* <Route path={'/'} element={<Landing/>}/> */}
 

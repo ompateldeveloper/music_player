@@ -7,6 +7,7 @@
     font-optical-sizing: auto;
     font-weight: 700;
 }
+
 .songs-list::-webkit-scrollbar-thumb{
     border-radius: 20px;
 }
