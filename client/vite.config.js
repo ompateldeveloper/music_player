@@ -8,10 +8,11 @@ export default defineConfig({
       '/api':{
         // target:'https://musicplayer-production-4f79.up.railway.app/',
         // target:'https://chords-r6bo.onrender.com/',
-        target:'http://localhost:4000',
+        target:'/',
+        // target:'http://localhost:4000',
         changeOrigin:true,
-        secure: false,
-        ws: false
+        // secure: false,
+        // ws: false
       }
     }
   },
