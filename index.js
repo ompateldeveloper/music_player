@@ -16,13 +16,13 @@ const PORT = process.env.PORT;
 
 
 
-app.use('/api',route);
+app.use('/api/',route);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/assets/:filename', (req, res) => {
+app.get('/api/assets/:userid/:filename', (req, res) => {
     try {
-        const {filename} = req.params
-        res.sendFile(path.join(__dirname, 'public','uploads',filename));
+        const {filename,userid} = req.params
+        res.sendFile(path.join(__dirname, 'public','uploads',userid,filename));
         
     } catch (error) {
         console.error(error);

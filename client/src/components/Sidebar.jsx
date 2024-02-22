@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { cn } from '../lib/utils'
-import { Asterisk, Guitar, List, ListChecks, LogOut, Mic, Moon, Plug, Plus, Sun, User, User2 } from 'lucide-react'
+import { Asterisk, ChevronRight, Guitar, List, ListChecks, LogOut, Mic, Moon, Plug, Plus, Sun, User, User2, X } from 'lucide-react'
 import { useThemeContext } from '../contexts/ThemeContext'
 import { useMusicContext } from '../contexts/MusicContextProvider'
 import { useAuthContext } from '../contexts/AuthContextProvider'
 export default function Sidebar() {
-    const { theme, setTheme, tab, setTab } = useThemeContext()
+    const { theme, setTheme} = useThemeContext()
+    const [menu,setMenu] = useState(false)
     const { user, dispatch } = useAuthContext()
     return (
-        <div className='h-screen min-w-64 p-4 pr-0 relative'>
-            <div className="inner h-full bg-zinc-200 dark:bg-zinc-800 rounded-md overflow-hidden p-2 flex flex-col gap-2">
+        <>
+        {menu && <div className="close-menu absolute inset-0 z-20" onClick={()=>setMenu(false)}>{}</div>}
+        <div className={cn('h-screen min-w-64 p-4 pr-0 relative md:absolute md:p-0 md:-left-64 md:top-0 md:shadow-xl md:duration-300 md:z-30 ', menu && "md:-left-0 ")}>
+            <div className={"close-menu absolute -right-12 z-50 top-8 bg-zinc-700 rounded-md md:flex w-6 overflow-hidden hidden " } onClick={()=>setMenu(!menu)}><ChevronRight className={cn('w-6 h-6 flex-shrink-0 ',menu&&"w-0")}/><X className='w-6 h-6 flex-shrink-0'/></div>
+            <div className="inner h-full bg-zinc-200 dark:bg-zinc-800 rounded-md md:rounded-none overflow-hidden p-2 flex flex-col gap-2">
                 <div className="logo flex flex-col items-center justify-center">
                     <img src="./logo.png" className='h-10 dark:invert ' alt="" />
                     <div className="dancing-script font-bold">CHORDS</div>
@@ -53,6 +57,7 @@ export default function Sidebar() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

@@ -19,6 +19,11 @@ const songSchema = new mongoose.Schema({
     },
     lyrics:{
         type:String,
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true, 
+    },
 })
 module.exports = mongoose.models.Task || mongoose.model("Song",songSchema);

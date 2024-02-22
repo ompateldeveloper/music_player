@@ -2,8 +2,10 @@ import { ArrowBigRight, ArrowBigRightDash, ChevronUpIcon, FastForward, Forward, 
 import React, { useEffect, useState } from 'react'
 import { cn, formatTime } from "../lib/utils"
 import {useMusicContext} from '../contexts/MusicContextProvider'
+import { useAuthContext } from '../contexts/AuthContextProvider';
 export default function AudioPlayer() {
     const {songs,audio,currentSong,setCurrentSong,isPlaying,setIsPlaying } = useMusicContext();
+    const {user} = useAuthContext()
     const [progress,setProgress] = useState(0)
     const repeatModes = ['repeat','off','category','song','single'];
     const [repeat,setRepeat] = useState('off')
@@ -37,7 +39,7 @@ export default function AudioPlayer() {
             const nextSong = songs[nextIndex];
             setCurrentSong(nextSong);
             console.log(nextSong.title,currentSong);
-            audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/'+nextSong.src
+            audio.src = '/api/assets/'+'user_'+user.data._id +'/'+ nextSong.src
             playSong();
         }
     };
@@ -48,7 +50,7 @@ export default function AudioPlayer() {
             const previousIndex = (currentIndex - 1 + songs.length) % songs.length;
             const previousSong = songs[previousIndex];
             setCurrentSong(previousSong);
-            audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/'+previousSong.src
+            audio.src = '/api/assets/'+'user_'+user.data._id +'/'+ previousSong.src
             playSong();
         }
     }
@@ -77,7 +79,7 @@ export default function AudioPlayer() {
                     case 'repeat':
                         const nextSong = songs[nextIndex];
                         setCurrentSong(nextSong);
-                        audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/' + nextSong.src;
+                        audio.src = '/api/assets/' +'user_'+user.data._id +'/'+ nextSong.src;
                         playSong();
                         break;
                     case 'off':
@@ -86,12 +88,12 @@ export default function AudioPlayer() {
                             setIsPlaying(false)
                             const nextSong = songs[nextIndex];
                             setCurrentSong(nextSong);
-                            audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/' + nextSong.src;
+                            audio.src = '/api/assets/' +'user_'+user.data._id +'/'+ nextSong.src;
                             return;
                         }else{
                             const nextSong = songs[nextIndex];
                             setCurrentSong(nextSong);
-                            audio.src = 'https://musicplayer-production-4f79.up.railway.app/api/assets/' + nextSong.src;
+                            audio.src = '/api/assets/' +'user_'+user.data._id +'/'+  nextSong.src;
                             playSong();
                         }
                         break;
@@ -130,7 +132,7 @@ export default function AudioPlayer() {
               artist: currentSong.artist,
               album: currentSong.album,
               artwork: [
-                { src: 'https://musicplayer-production-4f79.up.railway.app/api/assets/' + currentSong.cover , sizes: '128x128', type: 'image/jpg' },
+                { src: '/api/assets/' +'user_'+user.data._id +'/' + currentSong.cover , sizes: '128x128', type: 'image/jpg' },
               ]
             });
           
@@ -165,7 +167,7 @@ export default function AudioPlayer() {
 
     return (
         <div className='p-4 pl-0 overflow-hidden'>
-            <div className={cn("inner bg-zinc-200 dark:bg-zinc-800 rounded-b-lg border-t border-zinc-300 dark:border-zinc-700 border-opacity-10  p-2 absolute bottom-4 w-[calc(100%-24px)] h-36 duration-200",full&&"rounded-t-lg h-[calc(100%-32px)] border-none")}>
+            <div className={cn("inner bg-zinc-200 dark:bg-zinc-800 rounded-b-lg border-t border-zinc-300 dark:border-zinc-700 border-opacity-10  p-2 absolute bottom-4 w-[calc(100%-24px)] h-34 duration-200",full&&"rounded-t-lg h-[calc(100%-32px)] border-none")}>
                 <div className="progress flex items-center ">
                     {currentSong?<div className="text-xs m-2 ">{formatTime(audio.currentTime)}</div>:<div className="text-xs m-2 text-zinc-400 text-nowrap">--:--</div>}
                     <div className="w-full flex items-center relative ">
@@ -178,11 +180,11 @@ export default function AudioPlayer() {
                 </div>
                 <div className="grid place-items-center grid-cols-3 items-center mx-1 w-full">
                     <div className="meta mx-auto flex items-center my-1">
-                        <div className="h-20 aspect-[16/9] overflow-hidden rounded-md bg-zinc-300 dark:bg-zinc-700">
-                            {currentSong&&<img className='w-full h-full object-cover' src={'https://musicplayer-production-4f79.up.railway.app/api/assets/'+currentSong?.cover} alt="" />}
+                        <div className="h-14 lg:hidden aspect-[16/9] overflow-hidden rounded-md bg-zinc-300 dark:bg-zinc-700">
+                            {currentSong&&<img className='w-full h-full object-cover' src={'/api/assets/'+'user_'+user.data._id+'/'+currentSong?.cover} alt="" />}
                         </div>
-                        <div className='m-2 '>
-                            <div className={cn("title truncate max-w-64",!currentSong&&"bg-zinc-300 dark:bg-zinc-700 h-6 rounded")} title={currentSong?.title}>{currentSong?.title}</div>
+                        <div className='m-2 grid '>
+                            <div className={cn("title truncate lg:text-sm lg:max-w-36 md:max-w-32 max-w-64",!currentSong&&"bg-zinc-300 dark:bg-zinc-700 h-6 rounded")} title={currentSong?.title}>{currentSong?.title}</div>
                             <div className={cn("artist truncate max-w-32 rounded-sm dark:text-zinc-400 text-xs ",!currentSong&&"bg-zinc-300 dark:bg-zinc-700 h-3 my-1")}>{currentSong?.artist}</div>
                             <div className={cn("album truncate max-w-32 rounded-sm dark:text-zinc-400 text-xs",!currentSong&&"bg-zinc-300 dark:bg-zinc-700 h-3 my-1")}>{currentSong?.album}</div>
                         </div>

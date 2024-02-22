@@ -16,7 +16,7 @@ function sanitizeUser (user) {
     const sanitizedUser = { ...user.toObject() };
     delete sanitizedUser.password;
     delete sanitizedUser.__v;
-    delete sanitizedUser._id;
+    // delete sanitizedUser._id;
     return sanitizedUser;
 };
 function validate(body,res){
@@ -85,6 +85,7 @@ const signIn = async (req, res) => {
                 return res.status(400).json({error:"password is not strong"});
             }
         }
+        
         console.log('haloo');
         const user = await User.findOne({ email: req.body.email });
         if (!user) {

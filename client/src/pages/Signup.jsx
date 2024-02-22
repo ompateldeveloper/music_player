@@ -16,7 +16,7 @@ export default function Signup() {
         setIsLoading(true)
         setErr("")
 
-        const response = await fetch('https://musicplayer-production-4f79.up.railway.app/api/v1/auth/signup', {
+        const response = await fetch('/api/v1/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name,email, password })
