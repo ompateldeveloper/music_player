@@ -40,7 +40,7 @@ addOne = async (req, res) => {
             album: metadata.common.album || 'Unknown Album',
             cover: imageBuffer ? audioFile.filename.split('.')[0]+'.jpg': null,
             lyrics: metadata.common.lyrics?.toString() || "No Lyrics",
-            user:req.user._id,
+            user: req.user._id,
             src: audioFile.filename
         });
         console.log('song added');
